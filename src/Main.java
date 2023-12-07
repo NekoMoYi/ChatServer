@@ -222,9 +222,11 @@ public class Main {
                     targetUser = user;
             }
             if(currentUser != null && targetUser != null){
-                if(currentUser.friends.contains(targetUser.id)){
+                if(currentUser.friends.contains(targetUser.id))
                     addFriendResponse = new Response.addFriendResponse(0, "Already friends");
-                }else{
+                else if(currentUser.id == targetUser.id)
+                    addFriendResponse = new Response.addFriendResponse(0, "Cannot add yourself");
+                else{
                     currentUser.friends.add(targetUser.id);
                     targetUser.friends.add(currentUser.id);
                     saveUsers();
